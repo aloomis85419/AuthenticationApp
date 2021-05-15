@@ -32,7 +32,7 @@ public class LoginController {
         log.info("Loading login page...");
         model.addAttribute("credentialsVerified",credentials);
         if (credentialsService.isValidCredentials(credentials.getUsername(),credentials.getPassword())){
-            return "AuthenicationSuccessful";
+            return "AuthenticationSuccessful";
         }
         return "AuthenticationFailed";
     }
