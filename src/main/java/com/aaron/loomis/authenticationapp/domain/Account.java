@@ -5,9 +5,10 @@ import javax.persistence.*;
 @Entity
 public class Account {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToOne
+    @OneToOne(mappedBy = "account")
     private Credentials credentials;
     private String firstName;
     private String lastName;
@@ -49,7 +50,6 @@ public class Account {
         this.id = id;
     }
 
-    @Id
     public Long getId() {
         return id;
     }

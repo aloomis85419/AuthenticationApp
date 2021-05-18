@@ -8,14 +8,16 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
+    <script
 
     <meta charset="UTF-8">
     <title>Login</title>
 
 </head>
 <body>
+<script th:src="|$js}/main.js|"></script>
     <div class="container-fluid">
-            <form action="" id="LoginForm" class="d-block col-sm-5 mx-auto form p-4">
+            <form id="LoginForm" onsubmit="submitCredentials(document.getElementById('loginUserName').value,document.getElementById('loginPassword').value)" class="d-block col-sm-5 mx-auto form p-4">
                 <h2 class="display-4 py-lg-2 text-center"> Login To Account</h2>
                 <div class="form-group">
                     <label for="loginUserName">Username</label>
@@ -27,7 +29,7 @@
                     <!-- <small id="minPassReq" class="form-text text-muted">Minimum</small> -->
                 </div>
                 <div class="form-group">
-                    <button type="button" id="submitCredentials" class="btn">Login</button>
+                    <button type="submit" id="submitCredentials" class="btn">Login</button>
                 </div>
                 <div>
                     <small id="helpTextSignUp" class="form-text text-muted">No Account? Sign up!</small>

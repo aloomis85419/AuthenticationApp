@@ -1,16 +1,27 @@
 package com.aaron.loomis.authenticationapp.domain;
 
+
 import javax.persistence.*;
 
 @Entity
 public class Credentials {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String username;
     private String password;
     @OneToOne
+    @JoinColumn(name = "address_id",referencedColumnName = "id")
     private Account account;
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 
     public String getUsername() {
         return username;
@@ -32,7 +43,6 @@ public class Credentials {
         this.id = id;
     }
 
-    @Id
     public Long getId() {
         return id;
     }

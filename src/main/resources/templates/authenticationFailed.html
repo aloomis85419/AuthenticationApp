@@ -27,7 +27,7 @@
       <!-- <small id="minPassReq" class="form-text text-muted">Minimum</small> -->
     </div>
     <div class="form-group">
-      <small id="failedAuthentication" class="form-text text-muted" style="color: red">Authentication failed :( Get outta here hacker!</small>
+      <small id="failedAuthentication" class="form-text text-muted" style="color: red" th:text="${exception.getMessage()}"></small>
       <button type="button" id="submitCredentials" class="btn" aria-describedby="failedAuthentication">Login</button>
     </div>
     <div>
