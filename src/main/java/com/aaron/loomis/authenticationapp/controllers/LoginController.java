@@ -9,8 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 import javax.security.auth.login.CredentialNotFoundException;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -24,26 +27,20 @@ public class LoginController {
 
     @RequestMapping({Endpoints.LOGIN_PAGE_ENDPOINT,"","/"})
     public String getLoginPage(Model model){
-        model.addAttribute("credentials",new Credentials());
+        model.addAttribute("creds");
+        log.info("Loading login page...");
         return "login";
     }
 
     @ExceptionHandler({BadCredentialsException.class,CredentialNotFoundException.class})
     @PostMapping({Endpoints.CREDENTIALS_ENDPOINT})
-    public ModelAndView loginPageFormData(Exception exception,@RequestAttribute(value = "username")String username,@RequestAttribute(value = "password")String password, Model model){
-        log.info("Loading login page...");
-        Boolean credentialsFound = credentialsService.isValidCredentials(username,password);
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView loginPageFormData(Exception exception,@ModelAttribute(name = "creds") Credentials credentials){
+
+        Boolean credentialsFound = credentialsService.isValidCredentials(credentials.getUsername(),credentials.getPassword());
+        ModelAndView modelAndView = new ModelAndView("authenticationFailed");
         if (credentialsFound){
             modelAndView.setViewName("authenticationSuccessful");
         }else{
-            if (exception != null) {
-                if (exception instanceof BadCredentialsException) {
-                    exception = new BadCredentialsException("Improperly formatted password or username.");
-                } else if (exception instanceof CredentialNotFoundException) {
-                    exception = new CredentialNotFoundException("Invalid password or username.");
-                }
-            }
             modelAndView.addObject(exception);
             modelAndView.setViewName("authenticationFailed");
         }

@@ -8,24 +8,21 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
-    <script
-
     <meta charset="UTF-8">
     <title>Login</title>
 
 </head>
 <body>
-<script th:src="|$js}/main.js|"></script>
     <div class="container-fluid">
-            <form id="LoginForm" onsubmit="submitCredentials(document.getElementById('loginUserName').value,document.getElementById('loginPassword').value)" class="d-block col-sm-5 mx-auto form p-4">
+            <form  id="loginForm" method="post" th:object="${creds}" th:action="@{/}" class="d-block col-sm-5 mx-auto form p-4">
                 <h2 class="display-4 py-lg-2 text-center"> Login To Account</h2>
                 <div class="form-group">
-                    <label for="loginUserName">Username</label>
-                    <input type="text" class="form-control" id="loginUserName" placeholder="Enter username...">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username...">
                 </div>
                 <div class="form-group">
-                    <label for="loginPassword">Password</label>
-                    <input type="password" class="form-control" id="loginPassword" placeholder="Enter password...">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter password...">
                     <!-- <small id="minPassReq" class="form-text text-muted">Minimum</small> -->
                 </div>
                 <div class="form-group">
